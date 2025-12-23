@@ -2,21 +2,22 @@
 
 import { motion } from "framer-motion"
 import { Button } from "../ui/button"
-import { useMemo } from "react"
+import { useState, useEffect } from "react"
 
 export function Hero() {
-  const videoSrc = useMemo(() => {
-    const videos = [
-      "/index.mp4",
-      "/index1.mp4",
-      "/index33.mp4",
-    ]
-    return videos[Math.floor(Math.random() * videos.length)]
+  const [videoSrc, setVideoSrc] = useState<string | null>(null)
+
+  useEffect(() => {
+    const videos = ["/index.mp4", "/index1.mp4", "/index33.mp4"]
+    const randomVideo = videos[Math.floor(Math.random() * videos.length)]
+    setVideoSrc(randomVideo)
   }, [])
+
+  // Render nothing on server / before client picks video
+  if (!videoSrc) return null
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      
       {/* Video Background */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
@@ -34,8 +35,6 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-20 text-center px-6 max-w-4xl">
-        
-        {/* Main Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +53,6 @@ export function Hero() {
           Welcome To My Portfolio
         </motion.h1>
 
-        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,15 +60,12 @@ export function Hero() {
         >
           <Button
             onClick={() =>
-              document
-                .getElementById("projects")
-                ?.scrollIntoView({ behavior: "smooth" })
+              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
             }
           >
             View Projects
           </Button>
         </motion.div>
-
       </div>
     </section>
   )
