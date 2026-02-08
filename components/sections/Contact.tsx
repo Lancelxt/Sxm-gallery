@@ -179,7 +179,7 @@ export function Contact() {
               <p className="text-sm font-medium text-muted mb-1">LinkedIn</p>
             </motion.a>
             <motion.a
-              href="https://www.instagram.com/sxm_xtra/"
+              href="https://www.instagram.com/ryuga.ss/"
               whileHover={{ scale: 1.05 }}
               className="text-muted hover:text-[#6366f1] transition-colors"
             >
